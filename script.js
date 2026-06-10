@@ -49,10 +49,94 @@ async function cariData(){
     }
 
     hasil.innerHTML = `
-    <div class="not-found">
-        Memuat data...
-    </div>
-    `;
+
+<div class="card">
+
+<h2>${data.namaPelanggan}</h2>
+
+<div class="status-besar selesai">
+${data.keterangan}
+</div>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="timeline-title">
+Penerimaan Sampel
+</div>
+<div class="timeline-status">
+${formatTanggal(data.penerimaanSampel)}
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-title">
+Pengujian
+</div>
+<div class="timeline-status">
+${data.pengujian}
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-title">
+Subkontrak
+</div>
+<div class="timeline-status">
+${data.subkontrak}
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-title">
+LHP / Sertifikat Terbit
+</div>
+<div class="timeline-status">
+${data.sertifikat}
+</div>
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="item">
+<div class="label">Nomor Permintaan</div>
+<div class="value">${data.nomorPermintaan}</div>
+</div>
+
+<div class="item">
+<div class="label">Jumlah Sampel</div>
+<div class="value">${data.jumlahSampel}</div>
+</div>
+
+<div class="item">
+<div class="label">Jenis Pengujian</div>
+<div class="value">${data.jenisPengujian}</div>
+</div>
+
+<div class="item">
+<div class="label">Tanggal Bayar</div>
+<div class="value">${formatTanggal(data.tglBayar)}</div>
+</div>
+
+<div class="item">
+<div class="label">Estimasi Selesai</div>
+<div class="value">${formatTanggal(data.estimasiSelesai)}</div>
+</div>
+
+<div class="item">
+<div class="label">Keterangan</div>
+<div class="value">
+${badgeStatus(data.keterangan)}
+</div>
+</div>
+
+</div>
+
+</div>
+
+`;
 
     try{
 
