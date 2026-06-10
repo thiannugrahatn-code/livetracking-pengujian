@@ -36,7 +36,7 @@ function badgeStatus(status){
 
     return `
         <span class="status ${getStatusClass(status)}">
-            ${status}
+            ${status || "Belum"}
         </span>
     `;
 }
@@ -53,7 +53,7 @@ async function cariData(){
 
         hasil.innerHTML = `
         <div class="not-found">
-            Masukkan nomor permintaan terlebih dahulu
+            Masukkan Nomor Permintaan Terlebih Dahulu
         </div>
         `;
         return;
@@ -61,7 +61,7 @@ async function cariData(){
 
     hasil.innerHTML = `
     <div class="not-found">
-        Mengambil data...
+        Mengambil Data...
     </div>
     `;
 
@@ -77,7 +77,7 @@ async function cariData(){
 
             hasil.innerHTML = `
             <div class="not-found">
-                Data tidak ditemukan
+                Data Tidak Ditemukan
             </div>
             `;
             return;
@@ -96,45 +96,41 @@ async function cariData(){
                 Status : ${data.keterangan}
             </div>
 
-            <div class="timeline-horizontal">
+            <div class="timeline">
 
-                <div class="step ${getStatusClass(data.penerimaanSampel)}">
-                    <div class="circle"></div>
-                    <div class="title">
+                <div class="timeline-item">
+                    <div class="timeline-title">
                         Penerimaan Sampel
                     </div>
-                    <div class="desc">
+                    <div class="timeline-status">
                         ${formatTanggal(data.penerimaanSampel)}
                     </div>
                 </div>
 
-                <div class="step ${getStatusClass(data.pengujian)}">
-                    <div class="circle"></div>
-                    <div class="title">
+                <div class="timeline-item">
+                    <div class="timeline-title">
                         Pengujian
                     </div>
-                    <div class="desc">
-                        ${data.pengujian}
+                    <div class="timeline-status">
+                        ${data.pengujian || "-"}
                     </div>
                 </div>
 
-                <div class="step ${getStatusClass(data.subkontrak)}">
-                    <div class="circle"></div>
-                    <div class="title">
+                <div class="timeline-item">
+                    <div class="timeline-title">
                         Subkontrak
                     </div>
-                    <div class="desc">
-                        ${data.subkontrak}
+                    <div class="timeline-status">
+                        ${data.subkontrak || "-"}
                     </div>
                 </div>
 
-                <div class="step ${getStatusClass(data.sertifikat)}">
-                    <div class="circle"></div>
-                    <div class="title">
+                <div class="timeline-item">
+                    <div class="timeline-title">
                         LHP / Sertifikat
                     </div>
-                    <div class="desc">
-                        ${data.sertifikat}
+                    <div class="timeline-status">
+                        ${data.sertifikat || "-"}
                     </div>
                 </div>
 
@@ -199,6 +195,7 @@ async function cariData(){
             </div>
 
         </div>
+
         `;
 
     }catch(error){
@@ -207,8 +204,18 @@ async function cariData(){
 
         hasil.innerHTML = `
         <div class="not-found">
-            Gagal mengambil data dari server
+            Gagal Mengambil Data Dari Server
         </div>
         `;
     }
 }
+
+document
+.getElementById("nomor")
+.addEventListener("keypress",function(e){
+
+    if(e.key === "Enter"){
+        cariData();
+    }
+
+});
