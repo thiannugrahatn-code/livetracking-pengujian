@@ -8,23 +8,39 @@ function formatTanggal(tanggal){
     return new Date(tanggal).toLocaleDateString("id-ID");
 }
 
-function badgeStatus(status){
+function getStatusClass(status){
 
-    if(!status){
-        return '<span class="status belum">Belum</span>';
-    }
+    if(!status) return "belum";
 
     status = status.toLowerCase();
 
-    if(status.includes("selesai")){
-        return '<span class="status selesai">Selesai</span>';
+    if(
+        status.includes("selesai") ||
+        status.includes("terbit")
+    ){
+        return "selesai";
     }
 
-    if(status.includes("proses")){
-        return '<span class="status proses">Proses</span>';
+    if(
+        status.includes("proses") ||
+        status.includes("progress") ||
+        status.includes("on process")
+    ){
+        return "proses";
     }
 
-    return `<span class="status belum">${status}</span>`;
+    return "belum";
+}
+
+function badgeStatus(status){
+
+    const cls = getStatusClass(status);
+
+    return `
+        <span class="status ${cls}">
+            ${status || "Belum"}
+        </span>
+    `;
 }
 
 async function cariData(){
@@ -69,13 +85,16 @@ async function cariData(){
             return;
         }
 
+        const statusClass =
+        getStatusClass(data.keterangan);
+
         hasil.innerHTML = `
 
         <div class="card">
 
             <h2>${data.namaPelanggan}</h2>
 
-            <div class="status-besar selesai">
+            <div class="status-besar ${statusClass}">
                 Status : ${data.keterangan}
             </div>
 
@@ -95,7 +114,7 @@ async function cariData(){
                         Pengujian
                     </div>
                     <div class="timeline-status">
-                        ${data.pengujian}
+                        ${data.pengujian || "-"}
                     </div>
                 </div>
 
@@ -104,7 +123,7 @@ async function cariData(){
                         Subkontrak
                     </div>
                     <div class="timeline-status">
-                        ${data.subkontrak}
+                        ${data.subkontrak || "-"}
                     </div>
                 </div>
 
@@ -113,7 +132,7 @@ async function cariData(){
                         LHP / Sertifikat
                     </div>
                     <div class="timeline-status">
-                        ${data.sertifikat}
+                        ${data.sertifikat || "-"}
                     </div>
                 </div>
 
@@ -192,3 +211,11 @@ async function cariData(){
         `;
     }
 }
+
+document.getElementById("nomor").addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+        cariData();
+    }
+
+});
