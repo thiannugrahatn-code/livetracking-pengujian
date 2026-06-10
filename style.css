@@ -286,17 +286,17 @@ margin:auto auto 12px;
 transition:.3s;
 }
 
-.timeline-item.selesai::before{
+.timeline-item.timeline-selesai::before{
 background:#28a745;
 box-shadow:0 0 0 4px rgba(40,167,69,.25);
 }
 
-.timeline-item.proses::before{
+.timeline-item.timeline-proses::before{
 background:#ffc107;
 box-shadow:0 0 0 4px rgba(255,193,7,.25);
 }
 
-.timeline-item.belum::before{
+.timeline-item.timeline-belum::before{
 background:#ced4da;
 box-shadow:0 0 0 4px rgba(108,117,125,.15);
 }
