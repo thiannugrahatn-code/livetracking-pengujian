@@ -15,21 +15,32 @@ function getStatusClass(status){
 
     status = status.toString().toLowerCase().trim();
 
-    if(
-        status.includes("selesai") ||
-        status.includes("terbit")
-    ){
+    if(status === "selesai"){
         return "selesai";
     }
 
-    if(
-        status.includes("proses") ||
-        status.includes("process")
-    ){
+    if(status === "proses"){
         return "proses";
     }
 
     return "belum";
+}
+
+function getTimelineClass(status){
+
+    if(!status) return "timeline-belum";
+
+    status = status.toString().toLowerCase().trim();
+
+    if(status === "selesai"){
+        return "timeline-selesai";
+    }
+
+    if(status === "proses"){
+        return "timeline-proses";
+    }
+
+    return "timeline-belum";
 }
 
 function badgeStatus(status){
@@ -98,55 +109,55 @@ async function cariData(){
 
             <div class="timeline">
 
-                <div class="timeline-item selesai">
+    <div class="timeline-item timeline-selesai">
 
-                    <div class="timeline-title">
-                        Penerimaan Sampel
-                    </div>
+        <div class="timeline-title">
+            Penerimaan Sampel
+        </div>
 
-                    <div class="timeline-status">
-                        ${formatTanggal(data.penerimaanSampel)}
-                    </div>
+        <div class="timeline-status">
+            ${formatTanggal(data.penerimaanSampel)}
+        </div>
 
-                </div>
+    </div>
 
-                <div class="timeline-item ${getStatusClass(data.pengujian)}">
+    <div class="timeline-item ${getTimelineClass(data.pengujian)}">
 
-                    <div class="timeline-title">
-                        Pengujian
-                    </div>
+        <div class="timeline-title">
+            Pengujian
+        </div>
 
-                    <div class="timeline-status">
-                        ${data.pengujian || "-"}
-                    </div>
+        <div class="timeline-status">
+            ${data.pengujian || "-"}
+        </div>
 
-                </div>
+    </div>
 
-                <div class="timeline-item ${getStatusClass(data.subkontrak)}">
+    <div class="timeline-item ${getTimelineClass(data.subkontrak)}">
 
-                    <div class="timeline-title">
-                        Subkontrak
-                    </div>
+        <div class="timeline-title">
+            Subkontrak
+        </div>
 
-                    <div class="timeline-status">
-                        ${data.subkontrak || "-"}
-                    </div>
+        <div class="timeline-status">
+            ${data.subkontrak || "-"}
+        </div>
 
-                </div>
+    </div>
 
-                <div class="timeline-item ${getStatusClass(data.sertifikat)}">
+    <div class="timeline-item ${getTimelineClass(data.sertifikat)}">
 
-                    <div class="timeline-title">
-                        LHP / Sertifikat
-                    </div>
+        <div class="timeline-title">
+            LHP / Sertifikat
+        </div>
 
-                    <div class="timeline-status">
-                        ${data.sertifikat || "-"}
-                    </div>
+        <div class="timeline-status">
+            ${data.sertifikat || "-"}
+        </div>
 
-                </div>
+    </div>
 
-            </div>
+</div>    
 
             <div class="grid">
 
