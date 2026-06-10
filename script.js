@@ -15,11 +15,15 @@ function getStatusClass(status){
 
     status = status.toString().toLowerCase().trim();
 
-    if(status === "selesai"){
+    if(status.includes("selesai")){
         return "selesai";
     }
 
-    if(status === "proses"){
+    if(
+        status.includes("proses") ||
+        status.includes("process") ||
+        status.includes("progress")
+    ){
         return "proses";
     }
 
@@ -32,11 +36,15 @@ function getTimelineClass(status){
 
     status = status.toString().toLowerCase().trim();
 
-    if(status === "selesai"){
+    if(status.includes("selesai")){
         return "timeline-selesai";
     }
 
-    if(status === "proses"){
+    if(
+        status.includes("proses") ||
+        status.includes("process") ||
+        status.includes("progress")
+    ){
         return "timeline-proses";
     }
 
