@@ -5,9 +5,7 @@ function formatTanggal(tanggal){
 
     if(!tanggal) return "-";
 
-    return new Date(tanggal)
-    .toLocaleDateString("id-ID");
-
+    return new Date(tanggal).toLocaleDateString("id-ID");
 }
 
 function badgeStatus(status){
@@ -44,99 +42,14 @@ async function cariData(){
             Masukkan nomor permintaan terlebih dahulu
         </div>
         `;
-
         return;
     }
 
     hasil.innerHTML = `
-
-<div class="card">
-
-<h2>${data.namaPelanggan}</h2>
-
-<div class="status-besar selesai">
-${data.keterangan}
-</div>
-
-<div class="timeline">
-
-<div class="timeline-item">
-<div class="timeline-title">
-Penerimaan Sampel
-</div>
-<div class="timeline-status">
-${formatTanggal(data.penerimaanSampel)}
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-title">
-Pengujian
-</div>
-<div class="timeline-status">
-${data.pengujian}
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-title">
-Subkontrak
-</div>
-<div class="timeline-status">
-${data.subkontrak}
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-title">
-LHP / Sertifikat Terbit
-</div>
-<div class="timeline-status">
-${data.sertifikat}
-</div>
-</div>
-
-</div>
-
-<div class="grid">
-
-<div class="item">
-<div class="label">Nomor Permintaan</div>
-<div class="value">${data.nomorPermintaan}</div>
-</div>
-
-<div class="item">
-<div class="label">Jumlah Sampel</div>
-<div class="value">${data.jumlahSampel}</div>
-</div>
-
-<div class="item">
-<div class="label">Jenis Pengujian</div>
-<div class="value">${data.jenisPengujian}</div>
-</div>
-
-<div class="item">
-<div class="label">Tanggal Bayar</div>
-<div class="value">${formatTanggal(data.tglBayar)}</div>
-</div>
-
-<div class="item">
-<div class="label">Estimasi Selesai</div>
-<div class="value">${formatTanggal(data.estimasiSelesai)}</div>
-</div>
-
-<div class="item">
-<div class="label">Keterangan</div>
-<div class="value">
-${badgeStatus(data.keterangan)}
-</div>
-</div>
-
-</div>
-
-</div>
-
-`;
+    <div class="not-found">
+        Sedang mengambil data...
+    </div>
+    `;
 
     try{
 
@@ -153,7 +66,6 @@ ${badgeStatus(data.keterangan)}
                 Data tidak ditemukan
             </div>
             `;
-
             return;
         }
 
@@ -163,61 +75,101 @@ ${badgeStatus(data.keterangan)}
 
             <h2>${data.namaPelanggan}</h2>
 
+            <div class="status-besar selesai">
+                Status : ${data.keterangan}
+            </div>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        Penerimaan Sampel
+                    </div>
+                    <div class="timeline-status">
+                        ${formatTanggal(data.penerimaanSampel)}
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        Pengujian
+                    </div>
+                    <div class="timeline-status">
+                        ${data.pengujian}
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        Subkontrak
+                    </div>
+                    <div class="timeline-status">
+                        ${data.subkontrak}
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        LHP / Sertifikat
+                    </div>
+                    <div class="timeline-status">
+                        ${data.sertifikat}
+                    </div>
+                </div>
+
+            </div>
+
             <div class="grid">
 
                 <div class="item">
-                    <div class="label">Nomor Permintaan</div>
-                    <div class="value">${data.nomorPermintaan}</div>
-                </div>
-
-                <div class="item">
-                    <div class="label">Jumlah Sampel</div>
-                    <div class="value">${data.jumlahSampel}</div>
-                </div>
-
-                <div class="item">
-                    <div class="label">Jenis Pengujian</div>
-                    <div class="value">${data.jenisPengujian}</div>
-                </div>
-
-                <div class="item">
-                    <div class="label">Tanggal Bayar</div>
-                    <div class="value">${formatTanggal(data.tglBayar)}</div>
-                </div>
-
-                <div class="item">
-                    <div class="label">Penerimaan Sampel</div>
-                    <div class="value">${formatTanggal(data.penerimaanSampel)}</div>
-                </div>
-
-                <div class="item">
-                    <div class="label">Estimasi Selesai</div>
-                    <div class="value">${formatTanggal(data.estimasiSelesai)}</div>
-                </div>
-
-                <div class="item">
-                    <div class="label">Pengujian</div>
+                    <div class="label">
+                        Nomor Permintaan
+                    </div>
                     <div class="value">
-                        ${badgeStatus(data.pengujian)}
+                        ${data.nomorPermintaan}
                     </div>
                 </div>
 
                 <div class="item">
-                    <div class="label">Subkontrak</div>
+                    <div class="label">
+                        Jumlah Sampel
+                    </div>
                     <div class="value">
-                        ${badgeStatus(data.subkontrak)}
+                        ${data.jumlahSampel}
                     </div>
                 </div>
 
                 <div class="item">
-                    <div class="label">LHP / Sertifikat Terbit</div>
+                    <div class="label">
+                        Jenis Pengujian
+                    </div>
                     <div class="value">
-                        ${badgeStatus(data.sertifikat)}
+                        ${data.jenisPengujian}
                     </div>
                 </div>
 
                 <div class="item">
-                    <div class="label">Keterangan</div>
+                    <div class="label">
+                        Tanggal Bayar
+                    </div>
+                    <div class="value">
+                        ${formatTanggal(data.tglBayar)}
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="label">
+                        Estimasi Selesai
+                    </div>
+                    <div class="value">
+                        ${formatTanggal(data.estimasiSelesai)}
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="label">
+                        Keterangan
+                    </div>
                     <div class="value">
                         ${badgeStatus(data.keterangan)}
                     </div>
@@ -235,9 +187,8 @@ ${badgeStatus(data.keterangan)}
 
         hasil.innerHTML = `
         <div class="not-found">
-            Gagal mengambil data
+            Gagal mengambil data dari server
         </div>
         `;
     }
-
 }
