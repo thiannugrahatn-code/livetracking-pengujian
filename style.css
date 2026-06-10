@@ -8,8 +8,9 @@ font-family:'Segoe UI',sans-serif;
 body{
 background:linear-gradient(
 135deg,
-#0d4c8b,
-#1e73be
+#0B2447 0%,
+#19376D 50%,
+#576CBC 100%
 );
 min-height:100vh;
 padding:40px 20px;
