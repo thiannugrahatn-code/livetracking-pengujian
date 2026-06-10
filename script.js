@@ -13,7 +13,7 @@ function getStatusClass(status){
 
     if(!status) return "belum";
 
-    status = status.toLowerCase();
+    status = status.toString().toLowerCase().trim();
 
     if(
         status.includes("selesai") ||
@@ -83,7 +83,7 @@ async function cariData(){
             return;
         }
 
-        const statusClass =
+        const statusUtama =
         getStatusClass(data.keterangan);
 
         hasil.innerHTML = `
@@ -92,46 +92,58 @@ async function cariData(){
 
             <h2>${data.namaPelanggan}</h2>
 
-            <div class="status-besar ${statusClass}">
+            <div class="status-besar ${statusUtama}">
                 Status : ${data.keterangan}
             </div>
 
             <div class="timeline">
 
-                <div class="timeline-item">
+                <div class="timeline-item selesai">
+
                     <div class="timeline-title">
                         Penerimaan Sampel
                     </div>
+
                     <div class="timeline-status">
                         ${formatTanggal(data.penerimaanSampel)}
                     </div>
+
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item ${getStatusClass(data.pengujian)}">
+
                     <div class="timeline-title">
                         Pengujian
                     </div>
+
                     <div class="timeline-status">
                         ${data.pengujian || "-"}
                     </div>
+
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item ${getStatusClass(data.subkontrak)}">
+
                     <div class="timeline-title">
                         Subkontrak
                     </div>
+
                     <div class="timeline-status">
                         ${data.subkontrak || "-"}
                     </div>
+
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item ${getStatusClass(data.sertifikat)}">
+
                     <div class="timeline-title">
                         LHP / Sertifikat
                     </div>
+
                     <div class="timeline-status">
                         ${data.sertifikat || "-"}
                     </div>
+
                 </div>
 
             </div>
